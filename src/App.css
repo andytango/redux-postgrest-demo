@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 .App-logo {
@@ -14,18 +21,28 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.todos {
+  text-align: left;
+  min-width: 480px;
+}
+
+.todos-actions {
+  text-align: right;
+}
+
+.todo {
+  margin: 1em;
+}
+
+.todo-date {
+  float: right;
 }
 
 @keyframes App-logo-spin {
