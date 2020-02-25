@@ -6,6 +6,7 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import connectPostgrest from "redux-postgrest";
 import "./App.css";
+import connectPgWebsocket from "./ws";
 
 const { reducer, middleware } = connectPostgrest({
   url: "http://localhost:8000",
@@ -14,17 +15,11 @@ const { reducer, middleware } = connectPostgrest({
 
 const store = createStore(
   combineReducers({ api: reducer }),
-  composeWithDevTools(applyMiddleware(middleware))
+  composeWithDevTools(
+    connectPgWebsocket({url: 'ws://localhost:8080'}),
+    applyMiddleware(middleware),
+  )
 );
-
-const ws = new WebSocket('ws://localhost:8080/')
-
-ws.addEventListener('message', onWsMessage)
-
-function onWsMessage({data}) {
-  const {resource} = JSON.parse(data)
-  store.dispatch({type: resource})
-}
 
 function App() {
   return (
