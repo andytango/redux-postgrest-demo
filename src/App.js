@@ -16,8 +16,8 @@ const { reducer, middleware } = connectPostgrest({
 const store = createStore(
   combineReducers({ api: reducer }),
   composeWithDevTools(
-    connectPgWebsocket({url: 'ws://localhost:8080'}),
-    applyMiddleware(middleware),
+    connectPgWebsocket({ url: "ws://localhost:8080" }),
+    applyMiddleware(middleware)
   )
 );
 
@@ -61,7 +61,7 @@ function TodoForm() {
     >
       <input value={content} onChange={e => setContent(e.target.value)} />
       <input value="submit" type="submit" />
-    </form> 
+    </form>
   );
 }
 
@@ -71,10 +71,21 @@ function Todos() {
   const todos = useSelector(todosFromState);
   const [isDispatching, setIsDispatching] = useState();
   const dispatch = useDispatch();
+
   const dispatchLoadAction = useCallback(() => {
     setIsDispatching(true);
     dispatch({ type: "todos" });
   }, [setIsDispatching, dispatch]);
+
+  const dispatchDeleteAction = useCallback(
+    todo_id => {
+      dispatch({
+        type: "todos",
+        meta: { method: "DELETE", query: { todo_id: `eq.${todo_id}` } }
+      });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (!todos && !isDispatching) {
@@ -84,12 +95,10 @@ function Todos() {
 
   return (
     <div className="todos">
-      <div className="todos-actions">
-        <button onClick={dispatchLoadAction}>Refresh</button>
-      </div>
       {todos &&
-        todos.map(({ content, created_at }, key) => (
+        todos.map(({ todo_id, content, created_at }, key) => (
           <div className="todo" key={key}>
+            <button onClick={() => dispatchDeleteAction(todo_id)}>X</button>
             <strong>{content}</strong>
             <em className="todo-date">
               {new Date(created_at).toLocaleString()}
