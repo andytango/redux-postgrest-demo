@@ -8,7 +8,7 @@ import connectPostgrest from "redux-postgrest";
 import "./App.css";
 
 const { reducer, middleware } = connectPostgrest({
-  url: "http://localhost:3000",
+  url: "http://localhost:8000",
   http: Axios
 });
 
