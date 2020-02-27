@@ -1,6 +1,6 @@
 # redux-postgrest demo
 
-This is usable demo that illustrates how redux-postgrest, along with websockets, can be used to build an entire CRUD application by way of TodoMVC.
+This is a usable demo that illustrates how redux-postgrest, along with websockets, can be used to build an entire CRUD application by way of TodoMVC.
 
 ## Key Features
 
