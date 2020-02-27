@@ -7,6 +7,7 @@ This is a usable demo that illustrates how redux-postgrest, along with websocket
 - Dispatching actions to call the Postgrest API
 - Using selectors to retrieve API responses from the provided redux-postgrest store
 - Using a simple websocket implementation along with pg_websocket to keep front end data in sync - try using two browser windows side by side
+- Using clientside base64 encoding to upload and persist images in a Postgres `BYTEA` column
 
 ## Files to look at
 
