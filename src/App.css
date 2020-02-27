@@ -99,7 +99,6 @@ button,
 
 form input[type="submit"] {
   display: inline-block;
-  marign: auto;
 }
 
 .todos {
