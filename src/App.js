@@ -88,7 +88,7 @@ function TodoForm() {
 }
 
 function processImageContent(files) {
-  if (files.length) {
+  if (files && files.length) {
     return files[0].arrayBuffer().then(encode);
   } else {
     return Promise.resolve(null);
