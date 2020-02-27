@@ -1,4 +1,3 @@
-
 export function createPgRestActions(type) {
   return {
     get: createPgRestActionGet(type),
@@ -13,17 +12,17 @@ export const createPgRestActionGet = type => (query, meta = {}) => ({
   meta: { query, ...meta }
 });
 
-export const createPgRestActionPost = type => (data, meta = {}) => ({
+export const createPgRestActionPost = type => (body, meta = {}) => ({
   type,
-  meta: { data, ...meta }
+  meta: { body, method: "POST", ...meta }
 });
 
-export const createPgRestActionPatch = type => (query, data, meta = {}) => ({
+export const createPgRestActionPatch = type => (query, body, meta = {}) => ({
   type,
-  meta: { query, data, ...meta }
+  meta: { query, method: "PATCH", body, ...meta }
 });
 
 export const createPgRestActionDelete = type => (query, meta = {}) => ({
   type,
-  meta: { query, ...meta }
+  meta: { query, method: "DELETE", ...meta }
 });
