@@ -10,14 +10,17 @@ This is a usable demo that illustrates how redux-postgrest, along with websocket
 
 ## Files to look at
 
-- docker-compose.yaml
-- App.js
-- actions.js
-- ws.js
+- [docker-compose.yaml](https://github.com/andytango/redux-postgrest-demo/blob/master/docker-compose.yml)
+- [db/ddl.sql](https://github.com/andytango/redux-postgrest-demo/blob/master/db/ddl.sql)
+- [src/App.js](https://github.com/andytango/redux-postgrest-demo/blob/master/src/App.js)
+- [src/actions.js](https://github.com/andytango/redux-postgrest-demo/blob/master/src/actions.js)
+- [src/ws.js](https://github.com/andytango/redux-postgrest-demo/blob/master/src/ws.js)
 
 That's it!
 
 ## How to run it
+
+*You will need to install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).*
 
 As per usual:
 
