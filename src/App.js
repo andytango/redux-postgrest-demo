@@ -1,3 +1,4 @@
+import { encode } from "base64-arraybuffer";
 import { path } from "ramda";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
@@ -6,8 +7,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import connectPostgrest from "redux-postgrest";
 import { createPgRestActions } from "./actions";
 import "./App.css";
+import logo from "./logo.svg";
 import connectPgWebsocket from "./ws";
-import { encode } from "base64-arraybuffer";
 
 const { reducer, middleware } = connectPostgrest({
   url: "http://localhost:8000"
@@ -27,13 +28,16 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <header className="App-header">
-          <p>Todos</p>
-        </header>
-        <div>
-          <TodoForm />
-          <hr />
-          <Todos />
+        <div className="App-container">
+          <header className="App-header">
+            <h1>Todos</h1>
+            <img src={logo} className="App-logo" alt="logo" />
+          </header>
+          <div>
+            <TodoForm />
+            <hr />
+            <Todos />
+          </div>
         </div>
       </div>
     </Provider>
@@ -67,13 +71,18 @@ function TodoForm() {
         dispatchContent(content, imageContent);
       }}
     >
-      <input
-        type="text"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-      />
-      <input type="file" onChange={e => setImageContent(e.target.files)} />
-      <input value="submit" type="submit" />
+      <div>
+        <input
+          placeholder="I need to..."
+          type="text"
+          value={content}
+          onChange={e => setContent(e.target.value)}
+        />
+        <input value="＋" type="submit" />
+      </div>
+      <div>
+        <input type="file" onChange={e => setImageContent(e.target.files)} />
+      </div>
     </form>
   );
 }
@@ -144,7 +153,7 @@ function Todos() {
         todos.map(
           ({ todo_id, content, content_image, created_at }, todo_idx) => (
             <div className="todo" key={todo_id}>
-              <button onClick={() => dispatchDeleteAction(todo_id)}>X</button>
+              <button onClick={() => dispatchDeleteAction(todo_id)}>╳</button>
               <strong>
                 {editState.todo_id === todo_id ? (
                   <span>
@@ -164,15 +173,13 @@ function Todos() {
               {content_image && (
                 <img
                   className="todo-image"
-                  width="64"
-                  height="auto"
                   src={`data:*/*;base64,${content_image}`}
                   onClick={() => setImageState({ todo_idx, show: true })}
                 />
               )}
-              <em className="todo-date">
+              <span className="todo-date">
                 {new Date(created_at).toLocaleString()}
-              </em>
+              </span>
             </div>
           )
         )}

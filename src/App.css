@@ -9,23 +9,97 @@
   color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App-logo {
+  height: 8vmin;
+  pointer-events: none;
+  display: inline-block;
+}
+
+.App-container {
+  width: fit-content;
+  height: fit-content;
+  padding: 2em;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #2b2f38, #24282f);
+  box-shadow: 25px 25px 50px #1e2127, -25px -25px 50px #323741;
 }
 
 .App-header {
   font-size: calc(10px + 2vmin);
+  margin: 1em;
 }
 
-.App-link {
+form {
+  text-align: left;
+}
+
+input,
+button,
+*::-webkit-file-upload-button {
+  font: inherit;
+  border: none;
   color: #61dafb;
+  min-width: 50px;
+}
+
+input,
+*::-webkit-file-upload-button {
+  margin: 1em;
+}
+
+input {
+  margin: 0.5em 0;
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+input:focus,
+button {
+  outline: none;
+}
+
+form input[type="text"] {
+  width: calc(100% - 120px);
+  display: inline-block;
+  margin: auto 20px;
+  padding: 10px;
+  border-radius: 10px;
+  color: black;
+}
+
+input[type="file"] {
+  width: calc(100% - 100px);
+  position: relative;
+  height: 80px;
+  padding-left: 60px;
+}
+
+*::-webkit-file-upload-button {
+  margin-left: -30px;
+}
+
+*::-webkit-file-upload-button:focus {
+  outline: none;
+}
+
+form input[type="submit"],
+button,
+*::-webkit-file-upload-button {
+  padding: 12px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #24282f, #2b2f38);
+  box-shadow: 10px 10px 20px #1c1f24, -10px -10px 20px #343944;
+}
+
+form input[type="submit"] {
+  display: inline-block;
+  marign: auto;
 }
 
 .todos {
@@ -41,15 +115,18 @@
   margin: 1em;
 }
 
-.todo-date {
-  float: right;
+.todo span {
+  margin: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.todo-date {
+  float: right;
+  font-size: 0.75em;
+}
+
+.todo-image {
+  max-width: 64px;
+  max-height: 2em;
+  width: auto;
+  height: auto;
 }
