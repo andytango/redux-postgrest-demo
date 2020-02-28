@@ -1,9 +1,9 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import connectPostgrest from "redux-postgrest";
+import { connectPgRest } from "redux-postgrest";
 import connectPgWebsocket from "./helpers/ws";
 
-const { reducer, middleware } = connectPostgrest({
+const { reducer, middleware } = connectPgRest({
   url: "http://localhost:8000"
 });
 
@@ -15,4 +15,4 @@ const store = createStore(
   )
 );
 
-export default store
+export default store;

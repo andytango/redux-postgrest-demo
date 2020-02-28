@@ -40,6 +40,6 @@
     ]
   },
   "devDependencies": {
-    "redux-postgrest": "^1.0.1"
+    "redux-postgrest": "^1.0.2"
   }
 }
