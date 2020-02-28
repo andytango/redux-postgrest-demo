@@ -39,7 +39,7 @@ We also use:
 - [Selectors](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/selectors.js)
 
 ### React 
-- [Hooks](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoList.js)
+- [Hooks](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/hooks.js)
 - [Create Todo Form](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoForm.js)
 - [Todo List](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoList.js)
 
