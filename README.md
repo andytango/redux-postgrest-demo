@@ -31,12 +31,44 @@ We also use:
 ### Setup
 - [Backend Stack](https://github.com/andytango/redux-postgrest-demo/blob/master/docker-compose.yml)
 - [Database Schema](https://github.com/andytango/redux-postgrest-demo/blob/master/db/setup.sql)
-- [Redux Store](https://github.com/andytango/redux-postgrest-demo/blob/master/src/store.js)
 - [Websocket Client](https://github.com/andytango/redux-postgrest-demo/blob/master/src/ws.js)
 
-### Redux Actions & Selectors
-- [Actions](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/actions.js)
+### Redux Store, Actions and Selectors
+- [Store](https://github.com/andytango/redux-postgrest-demo/blob/master/src/store.js)
+```js
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { connectPgRest } from "redux-postgrest";
+import connectPgWebsocket from "./helpers/ws";
+
+const { reducer, middleware } = connectPgRest({
+  url: "http://localhost:8000"
+});
+
+const store = createStore(
+  combineReducers({ api: reducer }),
+  composeWithDevTools(
+    connectPgWebsocket({ url: "ws://localhost:8080" }),
+    applyMiddleware(middleware)
+  )
+);
+
+export default store;
+```
+
+- [Actions](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/actions.js):
+```js
+import {createPgRestActions} from 'redux-postgrest'
+
+export const createTodoAction = createPgRestActions("todos");
+```
+
 - [Selectors](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/selectors.js)
+```js
+import { path } from "ramda";
+
+export const todosFromState = path(["api", "todos", "GET", "body"]);
+```
 
 ### React 
 - [Hooks](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/hooks.js)
