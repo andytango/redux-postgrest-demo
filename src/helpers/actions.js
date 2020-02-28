@@ -26,3 +26,5 @@ export const createPgRestActionDelete = type => (query, meta = {}) => ({
   type,
   meta: { query, method: "DELETE", ...meta }
 });
+
+export const createTodoAction = createPgRestActions("todos");
