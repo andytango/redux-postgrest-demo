@@ -28,11 +28,21 @@ We also use:
 
 ## How much code are we talking about, exactly?
 
-- [docker-compose.yaml](https://github.com/andytango/redux-postgrest-demo/blob/master/docker-compose.yml)
-- [db/ddl.sql](https://github.com/andytango/redux-postgrest-demo/blob/master/db/ddl.sql)
-- [src/App.js](https://github.com/andytango/redux-postgrest-demo/blob/master/src/App.js)
-- [src/actions.js](https://github.com/andytango/redux-postgrest-demo/blob/master/src/actions.js)
-- [src/ws.js](https://github.com/andytango/redux-postgrest-demo/blob/master/src/ws.js)
+### Setup
+- [Backend Stack](https://github.com/andytango/redux-postgrest-demo/blob/master/docker-compose.yml)
+- [Database Schema](https://github.com/andytango/redux-postgrest-demo/blob/master/db/setup.sql)
+- [Redux Store](https://github.com/andytango/redux-postgrest-demo/blob/master/src/store.js)
+- [Websocket Client](https://github.com/andytango/redux-postgrest-demo/blob/master/src/ws.js)
+
+### Redux Actions & Selectors
+- [Actions](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/actions.js)
+- [Selectors](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/selectors.js)
+
+### React 
+- [Hooks](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoList.js)
+- [Create Todo Form](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoForm.js)
+- [Todo List](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoList.js)
+
 
 That's it!
 
