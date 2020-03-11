@@ -33,7 +33,7 @@ We also use:
 - [Database Schema](https://github.com/andytango/redux-postgrest-demo/blob/master/db/setup.sql)
 - [Websocket Client](https://github.com/andytango/redux-postgrest-demo/blob/master/src/ws.js)
 
-### Redux Store, Actions and Selectors
+### Redux
 - [Store](https://github.com/andytango/redux-postgrest-demo/blob/master/src/store.js)
 ```js
 import { applyMiddleware, combineReducers, createStore } from "redux";
@@ -56,25 +56,15 @@ const store = createStore(
 export default store;
 ```
 
-- [Actions](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/actions.js):
-```js
-import {createPgRestActions} from 'redux-postgrest'
+### React Hooks 
+- [Hooks](https://github.com/andytango/redux-postgrest-demo/blob/master/src/hooks/todos.js)
 
-export const createTodoAction = createPgRestActions("todos");
-```
-
-- [Selectors](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/selectors.js)
-```js
-import { path } from "ramda";
-
-export const todosFromState = path(["api", "todos", "GET", "body"]);
-```
-
-### React 
-- [Hooks](https://github.com/andytango/redux-postgrest-demo/blob/master/src/helpers/hooks.js)
+### React Components
 - [Create Todo Form](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoForm.js)
 - [Todo List](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoList.js)
-
+- [Todo List Item](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoListItem.js)
+- [Edit Todo Form](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoEditForm.js)
+- [Delete Todo Button](https://github.com/andytango/redux-postgrest-demo/blob/master/src/components/TodoDeleteButton.js)
 
 That's it!
 
