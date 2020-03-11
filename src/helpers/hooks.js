@@ -15,7 +15,6 @@ export function useListTodos() {
   const dispatch = useDispatchGet();
   const todos = useSelector(todosFromState);
   const [isDispatching, setIsDispatching] = useState();
-
   const dispatchLoadAction = useCallback(() => {
     setIsDispatching(true);
     dispatch();
@@ -50,7 +49,7 @@ export function useEditTodo() {
   const dispatch = useDispatchPatch();
   const submitTodo = useCallback(
     (todo_id, content) => {
-      setEditState({})
+      setEditState({});
       dispatch({ todo_id: `eq.${todo_id}` }, { content });
     },
     [dispatch]
@@ -61,6 +60,7 @@ export function useEditTodo() {
 
 export function useDeleteTodo() {
   const dispatch = useDispatchDelete();
+
   return useCallback(todo_id => dispatch({ todo_id: `eq.${todo_id}` }), [
     dispatch
   ]);

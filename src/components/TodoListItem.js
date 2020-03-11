@@ -12,12 +12,12 @@ export default function TodoListItem({
   todo_idx
 }) {
   const { editState, setEditState } = editTodo;
+  const isEditing = editState.todo_id === todo_id;
   const onContentClick = useCallback(() => setEditState({ todo_id, content }), [
     setEditState,
     todo_id,
     content
   ]);
-  const isEditing = editState.todo_id === todo_id;
   const onImageClick = useCallback(() => {
     setImageState({ todo_idx, show: true });
   }, [todo_idx, setImageState]);
