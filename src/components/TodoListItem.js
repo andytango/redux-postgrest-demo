@@ -1,5 +1,6 @@
 import React from "react";
-import { useDeleteTodo } from "../helpers/hooks";
+import TodoEditForm from './TodoEditForm'
+import TodoDeleteButton from './TodoDeleteButton'
 
 export default function TodoListItem({
   todo_id,
@@ -33,24 +34,5 @@ export default function TodoListItem({
       )}
       <span className="todo-date">{new Date(created_at).toLocaleString()}</span>
     </div>
-  );
-}
-
-function TodoDeleteButton({ todo_id }) {
-  const dispatchDeleteAction = useDeleteTodo();
-  return <button onClick={() => dispatchDeleteAction(todo_id)}>╳</button>;
-}
-
-function TodoEditForm({ todo_id, editTodo }) {
-  const { editState, setEditState, submitTodo } = editTodo;
-  return (
-    <span>
-      <input
-        type="text"
-        onChange={e => setEditState({ todo_id, content: e.target.value })}
-        value={editState.content}
-      />
-      <button onClick={submitTodo}>Done</button>
-    </span>
   );
 }
