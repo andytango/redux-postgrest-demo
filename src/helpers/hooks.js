@@ -32,32 +32,31 @@ export function useListTodos() {
 
 export function useCreateTodo() {
   const dispatch = useDispatchPost();
-  return useCallback(
-    (content, imageContent) =>
+  const [content, setContent] = useState("");
+  const [imageContent, setImageContent] = useState(null);
+  const submitTodo = useCallback(
+    () =>
       processImageContent(imageContent).then(image =>
         dispatch({ content, content_image: image })
       ),
-    [dispatch]
+    [dispatch, content, imageContent]
   );
+
+  return { content, setContent, setImageContent, submitTodo };
 }
 
 export function useEditTodo() {
   const [editState, setEditState] = useState({});
-
-  const editRow = useCallback(
-    (todo_id, content) => setEditState({ todo_id, content }),
-    [setEditState]
-  );
-
-  return { editRow, editState };
-}
-
-export function usePatchTodo() {
   const dispatch = useDispatchPatch();
-  return useCallback(
-    (todo_id, content) => dispatch({ todo_id: `eq.${todo_id}` }, { content }),
+  const submitTodo = useCallback(
+    (todo_id, content) => {
+      setEditState({})
+      dispatch({ todo_id: `eq.${todo_id}` }, { content });
+    },
     [dispatch]
   );
+
+  return { editState, setEditState, submitTodo };
 }
 
 export function useDeleteTodo() {

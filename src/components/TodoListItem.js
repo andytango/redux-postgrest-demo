@@ -1,24 +1,26 @@
-import React, { useCallback } from "react";
-import { useDeleteTodo, usePatchTodo } from "../helpers/hooks";
+import React from "react";
+import { useDeleteTodo } from "../helpers/hooks";
 
 export default function TodoListItem({
   todo_id,
   content,
   content_image,
   created_at,
-  editRow,
-  editState,
+  editTodo,
   setImageState,
   todo_idx
 }) {
+  const { editState, setEditState } = editTodo;
   return (
     <div className="todo">
       <TodoDeleteButton {...{ todo_id }} />
       <strong>
         {editState.todo_id === todo_id ? (
-          <TodoEditForm {...{ todo_id, editRow, editState }} />
+          <TodoEditForm {...{ todo_id, editTodo }} />
         ) : (
-          <span onClick={() => editRow(todo_id, content)}>{content}</span>
+          <span onClick={() => setEditState({ todo_id, content })}>
+            {content}
+          </span>
         )}
       </strong>
       {content_image && (
@@ -39,24 +41,16 @@ function TodoDeleteButton({ todo_id }) {
   return <button onClick={() => dispatchDeleteAction(todo_id)}>╳</button>;
 }
 
-function TodoEditForm({ todo_id, editRow, editState: { content } }) {
-  const dispatchPatchAction = usePatchTodo();
-  const handleButtonClick = useCallback(
-    payload => {
-      editRow({});
-      dispatchPatchAction(todo_id, payload);
-    },
-    [editRow, dispatchPatchAction, todo_id]
-  );
-
+function TodoEditForm({ todo_id, editTodo }) {
+  const { editState, setEditState, submitTodo } = editTodo;
   return (
     <span>
       <input
         type="text"
-        onChange={e => editRow(todo_id, e.target.value)}
-        value={content}
+        onChange={e => setEditState({ todo_id, content: e.target.value })}
+        value={editState.content}
       />
-      <button onClick={() => handleButtonClick(content)}>Done</button>
+      <button onClick={submitTodo}>Done</button>
     </span>
   );
 }

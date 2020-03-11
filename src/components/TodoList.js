@@ -5,10 +5,9 @@ import TodoListItem from "./TodoListItem";
 export default function Todos() {
   const todos = useListTodos();
   const [imageState, setImageState] = useState({ show: false });
-  const { editRow, editState } = useEditTodo();
+  const editTodo = useEditTodo();
   const listItemProps = {
-    editRow,
-    editState,
+    editTodo,
     imageState,
     setImageState
   };

@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useCreateTodo } from "../helpers/hooks";
 
 export default function TodoForm() {
-  const [content, setContent] = useState("");
-  const [imageContent, setImageContent] = useState(null);
-  const createTodo = useCreateTodo();
+  const { content, setContent, setImageContent, submitTodo } = useCreateTodo();
 
   return (
     <form
       type=""
       onSubmit={e => {
         e.preventDefault();
-        createTodo(content, imageContent);
+        submitTodo();
       }}
     >
       <div>
