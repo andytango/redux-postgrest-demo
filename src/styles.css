@@ -139,6 +139,13 @@ form input[type="submit"] {
   height: auto;
 }
 
+.todo-image-full {
+  max-width: 480px;
+  max-height: 480px;
+  width: auto;
+  height: auto;
+}
+
 hr {
   border-style: solid;
   border-color: #61dafb;
