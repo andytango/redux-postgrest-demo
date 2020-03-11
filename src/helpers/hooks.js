@@ -1,16 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createTodoAction } from "./actions";
+import { useSelector } from "react-redux";
 import { todosFromState } from "./selectors";
+import { makePgRestHooks } from "redux-postgrest";
+
+const {
+  useDispatchGet,
+  useDispatchPost,
+  useDispatchPatch,
+  useDispatchDelete
+} = makePgRestHooks("todos");
 
 export function useGetTodos() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchGet();
   const todos = useSelector(todosFromState);
   const [isDispatching, setIsDispatching] = useState();
 
   const dispatchLoadAction = useCallback(() => {
     setIsDispatching(true);
-    dispatch(createTodoAction.get());
+    dispatch();
   }, [setIsDispatching, dispatch]);
 
   useEffect(() => {
@@ -34,18 +41,16 @@ export function useEditTodos() {
 }
 
 export function usePatchTodos() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchPatch();
   return useCallback(
-    (todo_id, content) =>
-      dispatch(createTodoAction.patch({ todo_id: `eq.${todo_id}` }, {content})),
+    (todo_id, content) => dispatch({ todo_id: `eq.${todo_id}` }, { content }),
     [dispatch]
   );
 }
 
 export function useDeleteTodos() {
-  const dispatch = useDispatch();
-  return useCallback(
-    todo_id => dispatch(createTodoAction.delete({ todo_id: `eq.${todo_id}` })),
-    [dispatch]
-  );
+  const dispatch = useDispatchDelete();
+  return useCallback(todo_id => dispatch({ todo_id: `eq.${todo_id}` }), [
+    dispatch
+  ]);
 }
