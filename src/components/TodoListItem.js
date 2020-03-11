@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useDeleteTodos, usePatchTodos } from "../helpers/hooks";
+import { useDeleteTodo, usePatchTodo } from "../helpers/hooks";
 
 export default function TodoListItem({
   todo_id,
@@ -35,12 +35,12 @@ export default function TodoListItem({
 }
 
 function TodoDeleteButton({ todo_id }) {
-  const dispatchDeleteAction = useDeleteTodos();
+  const dispatchDeleteAction = useDeleteTodo();
   return <button onClick={() => dispatchDeleteAction(todo_id)}>╳</button>;
 }
 
 function TodoEditForm({ todo_id, editRow, editState: { content } }) {
-  const dispatchPatchAction = usePatchTodos();
+  const dispatchPatchAction = usePatchTodo();
   const handleButtonClick = useCallback(
     payload => {
       editRow({});

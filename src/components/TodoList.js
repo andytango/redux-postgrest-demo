@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useEditTodos, useGetTodos } from "../helpers/hooks";
+import { useEditTodo, useListTodos } from "../helpers/hooks";
 import TodoListItem from "./TodoListItem";
 
 export default function Todos() {
-  const todos = useGetTodos();
+  const todos = useListTodos();
   const [imageState, setImageState] = useState({ show: false });
-  const { editRow, editState } = useEditTodos();
+  const { editRow, editState } = useEditTodo();
   const listItemProps = {
     editRow,
     editState,

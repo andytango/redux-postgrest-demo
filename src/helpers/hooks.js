@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { todosFromState } from "./selectors";
 import { makePgRestHooks } from "redux-postgrest";
 import { processImageContent } from "../helpers/images";
+import { todosFromState } from "./selectors";
 
 const {
   useDispatchGet,
@@ -11,7 +11,7 @@ const {
   useDispatchDelete
 } = makePgRestHooks("todos");
 
-export function useGetTodos() {
+export function useListTodos() {
   const dispatch = useDispatchGet();
   const todos = useSelector(todosFromState);
   const [isDispatching, setIsDispatching] = useState();
@@ -41,7 +41,7 @@ export function useCreateTodo() {
   );
 }
 
-export function useEditTodos() {
+export function useEditTodo() {
   const [editState, setEditState] = useState({});
 
   const editRow = useCallback(
@@ -52,7 +52,7 @@ export function useEditTodos() {
   return { editRow, editState };
 }
 
-export function usePatchTodos() {
+export function usePatchTodo() {
   const dispatch = useDispatchPatch();
   return useCallback(
     (todo_id, content) => dispatch({ todo_id: `eq.${todo_id}` }, { content }),
@@ -60,7 +60,7 @@ export function usePatchTodos() {
   );
 }
 
-export function useDeleteTodos() {
+export function useDeleteTodo() {
   const dispatch = useDispatchDelete();
   return useCallback(todo_id => dispatch({ todo_id: `eq.${todo_id}` }), [
     dispatch
