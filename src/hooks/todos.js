@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makePgRestHooks } from "redux-postgrest";
 import { processImageContent } from "../helpers/images";
-import { todosFromState } from "./selectors";
+import { todosFromState } from "../helpers/selectors";
 import { EDIT_TODO_FORM_CHANGE } from "../reducers/editTodoForm";
 
 const {

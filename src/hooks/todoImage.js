@@ -1,7 +1,7 @@
 import { prop } from "ramda";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useListTodos } from "../helpers/hooks";
+import { useListTodos } from "./todos";
 import { HIDE_TODO_IMAGE, SHOW_TODO_IMAGE } from "../reducers/todoImage";
 
 const selectImageTodoState = prop("todoImage");

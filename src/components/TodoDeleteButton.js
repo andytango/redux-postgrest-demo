@@ -1,5 +1,5 @@
 import React from "react";
-import { useDeleteTodo } from "../helpers/hooks";
+import { useDeleteTodo } from "../hooks/todos";
 
 export default function TodoDeleteButton({ todo_id }) {
   const dispatchDeleteAction = useDeleteTodo();
