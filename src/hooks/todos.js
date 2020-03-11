@@ -1,9 +1,8 @@
-import { prop } from "ramda";
+import { path, prop } from "ramda";
 import { useCallback, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makePgRestHooks } from "redux-postgrest";
 import { processImageContent } from "../helpers/images";
-import { todosFromState } from "../helpers/selectors";
 import { EDIT_TODO_FORM_CHANGE } from "../reducers/editTodoForm";
 
 const {
@@ -12,6 +11,8 @@ const {
   useDispatchPatch,
   useDispatchDelete
 } = makePgRestHooks("todos");
+
+const todosFromState = path(["api", "todos", "GET", "body"]);
 
 export function useListTodos() {
   const dispatch = useDispatchGet();
