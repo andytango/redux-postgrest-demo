@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { todosFromState } from "./selectors";
 import { makePgRestHooks } from "redux-postgrest";
+import { processImageContent } from "../helpers/images";
 
 const {
   useDispatchGet,
@@ -27,6 +28,17 @@ export function useGetTodos() {
   }, [dispatchLoadAction, todos, isDispatching]);
 
   return todos;
+}
+
+export function useCreateTodo() {
+  const dispatch = useDispatchPost();
+  return useCallback(
+    (content, imageContent) =>
+      processImageContent(imageContent).then(image =>
+        dispatch({ content, content_image: image })
+      ),
+    [dispatch]
+  );
 }
 
 export function useEditTodos() {

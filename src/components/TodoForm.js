@@ -1,28 +1,17 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
-import { createTodoAction } from "../helpers/actions";
-import { processImageContent } from "../helpers/images";
+import React, { useState } from "react";
+import { useCreateTodo } from "../helpers/hooks";
 
 export default function TodoForm() {
   const [content, setContent] = useState("");
   const [imageContent, setImageContent] = useState(null);
-  const dispatch = useDispatch();
-
-  const dispatchContent = useCallback(
-    (content, imageContent) => {
-      processImageContent(imageContent).then(image => {
-        dispatch(createTodoAction.post({ content, content_image: image }));
-      });
-    },
-    [dispatch]
-  );
+  const createTodo = useCreateTodo();
 
   return (
     <form
       type=""
       onSubmit={e => {
         e.preventDefault();
-        dispatchContent(content, imageContent);
+        createTodo(content, imageContent);
       }}
     >
       <div>
