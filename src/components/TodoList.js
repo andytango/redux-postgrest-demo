@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { useEditTodo, useListTodos } from "../helpers/hooks";
+import { useListTodos } from "../helpers/hooks";
 import TodoListItem from "./TodoListItem";
 
 export default function Todos() {
   const todos = useListTodos();
   const [imageState, setImageState] = useState({ show: false });
-  const editTodo = useEditTodo();
   const listItemProps = {
-    editTodo,
     imageState,
     setImageState
   };

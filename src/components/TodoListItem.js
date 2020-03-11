@@ -1,20 +1,21 @@
 import React, { useCallback } from "react";
 import TodoDeleteButton from "./TodoDeleteButton";
 import TodoEditForm from "./TodoEditForm";
+import { useGetEditFormState, useSetEditFormState } from "../helpers/hooks";
 
 export default function TodoListItem({
   todo_id,
   content,
   content_image,
   created_at,
-  editTodo,
   setImageState,
   todo_idx
 }) {
-  const { editState, setEditState } = editTodo;
-  const isEditing = editState.todo_id === todo_id;
-  const onContentClick = useCallback(() => setEditState({ todo_id, content }), [
-    setEditState,
+  const editFormState = useGetEditFormState()
+  const setEditFormState = useSetEditFormState()
+  const isEditing = editFormState.todo_id === todo_id;
+  const onContentClick = useCallback(() => setEditFormState({ todo_id, content }), [
+    setEditFormState,
     todo_id,
     content
   ]);
@@ -27,7 +28,7 @@ export default function TodoListItem({
       <TodoDeleteButton {...{ todo_id }} />
       <strong>
         {isEditing ? (
-          <TodoEditForm {...{ todo_id, editTodo }} />
+          <TodoEditForm {...{ todo_id }} />
         ) : (
           <span onClick={onContentClick}>{content}</span>
         )}

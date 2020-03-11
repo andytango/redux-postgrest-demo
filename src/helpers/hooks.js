@@ -1,8 +1,10 @@
+import { prop } from "ramda";
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { makePgRestHooks } from "redux-postgrest";
 import { processImageContent } from "../helpers/images";
 import { todosFromState } from "./selectors";
+import { EDIT_TODO_FORM_CHANGE } from "../reducers/editTodoForm";
 
 const {
   useDispatchGet,
@@ -44,18 +46,26 @@ export function useCreateTodo() {
   return { content, setContent, setImageContent, submitTodo };
 }
 
-export function useEditTodo() {
-  const [editState, setEditState] = useState({});
-  const dispatch = useDispatchPatch();
-  const submitTodo = useCallback(
-    (todo_id, content) => {
-      setEditState({});
-      dispatch({ todo_id: `eq.${todo_id}` }, { content });
-    },
-    [dispatch]
+const getEditState = prop("editTodo");
+
+export function useGetEditFormState() {
+  return useSelector(getEditState);
+}
+
+export function useSetEditFormState() {
+  const dispatch = useDispatch();
+  return state => dispatch({ type: EDIT_TODO_FORM_CHANGE, ...state });
+}
+
+export function useDispatchEditTodo() {
+  const { todo_id, content } = useGetEditFormState();
+  const dispatchPatch = useDispatchPatch();
+  const dispatch = useCallback(
+    () => dispatchPatch({ todo_id: `eq.${todo_id}` }, { content }),
+    [dispatchPatch, todo_id, content]
   );
 
-  return { editState, setEditState, submitTodo };
+  return dispatch;
 }
 
 export function useDeleteTodo() {
